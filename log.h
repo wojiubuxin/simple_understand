@@ -29,7 +29,7 @@ namespace simple
 		void log_print(const std::string& filename, T...args)
 		{
 			log_data temp;
-			temp.filename = get_now_time_flag() + filename + ".log";
+			temp.filename = filename + "_" + get_now_time_flag() + ".log";
 
 			temp.data = get_now_time_flag(2) + log_pre_end(args...) + "\n";
 
@@ -72,10 +72,10 @@ namespace simple
 		void threadfunc();
 		void stop_thread_write();
 
-		//生产的
+		//脡煤虏煤碌脛
 		std::deque<log_data>pro_deque;
 		
-		//要落地的
+		//脪陋脗盲碌脴碌脛
 		std::deque<log_data>con_deque;
 
 
