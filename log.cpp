@@ -33,7 +33,7 @@ void log::stop_thread_write()
 	log_write->join();
 }
 
-//ÂäµØÏß³Ì
+//è½åœ°çº¿ç¨‹
 void log::threadfunc()
 {
 	while (run)
@@ -47,11 +47,11 @@ void log::threadfunc()
 				
 			}
 		
-			//½»»»Ò»ÏÂ
+			//äº¤æ¢ä¸€ä¸‹
 			con_deque.swap(pro_deque);
 		}
 
-		//¿ªÊ¼ÂäµØ
+		//å¼€å§‹è½åœ°
 		while ( con_deque.empty() == false )
 		{
 			log_data temp;
@@ -74,15 +74,15 @@ void log::threadfunc()
 	
 }
 
-//»ñÈ¡Ê±¼ä¸ñÊ½,ÓÃÓÚÉú³ÉÎÄ¼şÃûºÍÈÕÖ¾Ç°×ºÊ±¼ä´Á
+//è·å–æ—¶é—´æ ¼å¼,ç”¨äºç”Ÿæˆæ–‡ä»¶åå’Œæ—¥å¿—å‰ç¼€æ—¶é—´æˆ³
 std::string log::get_now_time_flag(int flag_file_name)
 {
 	auto timeNow = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 	
-	//µÃµ½Ãë¼¶flag
+	//å¾—åˆ°ç§’çº§flag
 	__int64 flag = timeNow.count() / 1000;
 
-	//ºÁÃë
+	//æ¯«ç§’
 	int millisecond = timeNow.count() - (flag * 1000);
 
 	time_t now = flag;
@@ -96,7 +96,7 @@ std::string log::get_now_time_flag(int flag_file_name)
 
 	int tm_year = 1900 + time_data.tm_year;
 	int tm_mon = time_data.tm_mon + 1;
-	sprintf_s(timeStrBuf, "%d-%02d-%02d [%02d:%02d:%02d:%03d] ", tm_year,
+	sprintf_s(timeStrBuf, "%d-%02d-%02d [%02d:%02d:%02d:%03d]", tm_year,
 		tm_mon,
 		time_data.tm_mday,
 		time_data.tm_hour,
