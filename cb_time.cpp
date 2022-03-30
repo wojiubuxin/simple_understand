@@ -28,7 +28,7 @@ void cb_time::stop_thread_cb()
 	run_cb->join();
 }
 
-//»Øµ÷º¯Êı
+//å›è°ƒå‡½æ•°
 void cb_time::threadfunc_cb()
 {
 	while (run_flag_cb)
@@ -42,7 +42,7 @@ void cb_time::threadfunc_cb()
 				cb_sleep.wait(lock);
 			}
 
-			//ºÁÃë
+			//æ¯«ç§’
 			int64_t flag_sleep_gap = 600 * 1000;
 			bool break_flag_cb = false;
 
@@ -50,7 +50,7 @@ void cb_time::threadfunc_cb()
 			{
 				for (auto iter = cb_list.begin(); iter != cb_list.end();)
 				{
-					//»ñÈ¡µ±Ç°Ê±¼äºÁÃëÊ±¼ä´Á
+					//è·å–å½“å‰æ—¶é—´æ¯«ç§’æ—¶é—´æˆ³
 					int64_t now_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
 					if (iter->first <= now_time)
@@ -60,10 +60,10 @@ void cb_time::threadfunc_cb()
 					}
 					else
 					{
-						//¼ÆËã×îĞÂµÈ´ıÊ±¼ä
+						//è®¡ç®—æœ€æ–°ç­‰å¾…æ—¶é—´
 						flag_sleep_gap =  iter->first - now_time;
 						break_flag_cb = true;
-						//ºóÃæ¶¼ÊÇÃ»µ½Ê±¼äµÄ£¬¿ÉÒÔÌø³ö
+						//åé¢éƒ½æ˜¯æ²¡åˆ°æ—¶é—´çš„ï¼Œå¯ä»¥è·³å‡º
 						break;
 					}
 				}
@@ -82,7 +82,7 @@ void cb_time::threadfunc_cb()
 	cb_list.clear();
 }
 
-//²åÈë¶¨Ê±Æ÷½Ó¿Ú
+//æ’å…¥å®šæ—¶å™¨æ¥å£
 void cb_time::insert_time_cb(double gap, time_func_cb cb, std::string cb_name)
 {
 	if (cb)
@@ -105,7 +105,7 @@ void cb_time::insert_time_cb(double gap, time_func_cb cb, std::string cb_name)
 	}
 }
 
-//É¾³ı¶¨Ê±Æ÷
+//åˆ é™¤å®šæ—¶å™¨
 void cb_time::del_time_cb(std::string cb_name)
 {
 	if (cb_name.size()>0)
@@ -116,7 +116,7 @@ void cb_time::del_time_cb(std::string cb_name)
 		for (auto iter = cb_list.begin(); iter != cb_list.end();)
 		{
 			std::cout << "test-1 " << iter->second.cb_name.c_str() << " " << cb_name.c_str() << std::endl;
-			if (iter->second.cb_name.compare(cb_name) == 0)
+			if (iter->second.cb_name == cb_name)
 			{
 				cb_list.erase(iter++);
 				flag = true;
